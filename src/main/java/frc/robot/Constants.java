@@ -18,7 +18,7 @@ public final class Constants {
     public static final double DEADBAND = 0.05;
   }
 
- public static final class Shooter {
+  public static final class Shooter {
   public static final int LEFT_SHOOTER_ID  = 5;
   public static final int RIGHT_SHOOTER_ID = 6;
 
@@ -31,6 +31,17 @@ public final class Constants {
   public static final double REVERSE_SPEED = -1.0;  // LB
   public static final double TRIGGER_DEADBAND = 0.05;
 }
+
+  public static final class Hopper {
+    // TODO: Set to the hopper motor's CAN ID.
+    public static final int MOTOR_ID = 7;
+
+    public static final boolean INVERT = false;
+    public static final int CURRENT_LIMIT_AMPS = 30;
+
+    // Speed to load balls into the hopper when B is pressed.
+    public static final double LOAD_SPEED = 0.6;
+  }
 
   private Constants() {}
 }
