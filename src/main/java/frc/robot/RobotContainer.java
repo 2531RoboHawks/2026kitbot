@@ -44,14 +44,21 @@ public class RobotContainer {
         )
     );
 
-    // Hopper control: hold B to load balls into the hopper.
+    // Hopper control:
+    // - Hold B for automatic loading (overrides manual)
+    // - Otherwise use LT for manual variable-speed control
     hopper.setDefaultCommand(
         new RunCommand(
             () -> {
               if (driver.getBButton()) {
                 hopper.load();
               } else {
-                hopper.stop();
+                double lt = driver.getLeftTriggerAxis();
+                if (lt > Constants.Hopper.MANUAL_TRIGGER_DEADBAND) {
+                  hopper.set(lt);
+                } else {
+                  hopper.stop();
+                }
               }
             },
             hopper

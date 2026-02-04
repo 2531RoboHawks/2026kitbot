@@ -15,15 +15,22 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class HopperSubsystem extends SubsystemBase {
-  private final SparkMax hopperMotor = new SparkMax(Constants.Hopper.MOTOR_ID, MotorType.kBrushed);
+  private final SparkMax upperMotor = new SparkMax(Constants.Hopper.UPPER_MOTOR_ID, MotorType.kBrushed);
+  private final SparkMax lowerMotor = new SparkMax(Constants.Hopper.LOWER_MOTOR_ID, MotorType.kBrushed);
 
   public HopperSubsystem() {
-    SparkMaxConfig cfg = new SparkMaxConfig();
-    cfg.smartCurrentLimit(Constants.Hopper.CURRENT_LIMIT_AMPS);
-    cfg.idleMode(IdleMode.kBrake);
-    cfg.inverted(Constants.Hopper.INVERT);
+    SparkMaxConfig upperCfg = new SparkMaxConfig();
+    upperCfg.smartCurrentLimit(Constants.Hopper.CURRENT_LIMIT_AMPS);
+    upperCfg.idleMode(IdleMode.kBrake);
+    upperCfg.inverted(Constants.Hopper.UPPER_INVERT);
 
-    configOrPrint(hopperMotor, cfg);
+    SparkMaxConfig lowerCfg = new SparkMaxConfig();
+    lowerCfg.smartCurrentLimit(Constants.Hopper.CURRENT_LIMIT_AMPS);
+    lowerCfg.idleMode(IdleMode.kBrake);
+    lowerCfg.inverted(Constants.Hopper.LOWER_INVERT);
+
+    configOrPrint(upperMotor, upperCfg);
+    configOrPrint(lowerMotor, lowerCfg);
   }
 
   private void configOrPrint(SparkMax spark, SparkMaxConfig cfg) {
@@ -39,10 +46,13 @@ public class HopperSubsystem extends SubsystemBase {
 
   /** speed in [-1, 1] */
   public void set(double speed) {
-    hopperMotor.set(MathUtil.clamp(speed, -1.0, 1.0));
+    double output = MathUtil.clamp(speed, -1.0, 1.0);
+    upperMotor.set(output);
+    lowerMotor.set(output);
   }
 
   public void stop() {
-    hopperMotor.stopMotor();
+    upperMotor.stopMotor();
+    lowerMotor.stopMotor();
   }
 }

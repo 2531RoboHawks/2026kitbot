@@ -33,14 +33,18 @@ public final class Constants {
 }
 
   public static final class Hopper {
-    // TODO: Set to the hopper motor's CAN ID.
-    public static final int MOTOR_ID = 7;
+    // FRC 2026 kitbot hopper:
+    // CAN 6 = upper/right hopper motor, CAN 5 = lower/floor intake motor.
+    public static final int UPPER_MOTOR_ID = 6;
+    public static final int LOWER_MOTOR_ID = 5;
 
-    public static final boolean INVERT = false;
+    public static final boolean UPPER_INVERT = false;
+    public static final boolean LOWER_INVERT = false;
     public static final int CURRENT_LIMIT_AMPS = 30;
 
-    // Speed to load balls into the hopper when B is pressed.
+    // Speed to load balls into the hopper when B is held.
     public static final double LOAD_SPEED = 0.6;
+    public static final double MANUAL_TRIGGER_DEADBAND = 0.05;
   }
 
   private Constants() {}
