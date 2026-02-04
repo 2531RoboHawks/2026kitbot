@@ -15,23 +15,22 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
-  // BRUSHED shooter motors:
-  private final SparkMax leftShooter  = new SparkMax(Constants.Shooter.LEFT_SHOOTER_ID, MotorType.kBrushed);
-  private final SparkMax rightShooter = new SparkMax(Constants.Shooter.RIGHT_SHOOTER_ID, MotorType.kBrushed);
+  private final SparkMax upperMotor = new SparkMax(Constants.Feeder.UPPER_MOTOR_ID, MotorType.kBrushed);
+  private final SparkMax lowerMotor = new SparkMax(Constants.Feeder.LOWER_MOTOR_ID, MotorType.kBrushed);
 
   public ShooterSubsystem() {
-    SparkMaxConfig leftCfg = new SparkMaxConfig();
-    leftCfg.smartCurrentLimit(Constants.Shooter.CURRENT_LIMIT_AMPS);
-    leftCfg.idleMode(IdleMode.kCoast);
-    leftCfg.inverted(false);
+    SparkMaxConfig upperCfg = new SparkMaxConfig();
+    upperCfg.smartCurrentLimit(Constants.Feeder.CURRENT_LIMIT_AMPS);
+    upperCfg.idleMode(IdleMode.kBrake);
+    upperCfg.inverted(Constants.Feeder.UPPER_INVERT);
 
-    SparkMaxConfig rightCfg = new SparkMaxConfig();
-    rightCfg.smartCurrentLimit(Constants.Shooter.CURRENT_LIMIT_AMPS);
-    rightCfg.idleMode(IdleMode.kCoast);
-    rightCfg.inverted(Constants.Shooter.INVERT_RIGHT_SHOOTER);
+    SparkMaxConfig lowerCfg = new SparkMaxConfig();
+    lowerCfg.smartCurrentLimit(Constants.Feeder.CURRENT_LIMIT_AMPS);
+    lowerCfg.idleMode(IdleMode.kBrake);
+    lowerCfg.inverted(Constants.Feeder.LOWER_INVERT);
 
-    configOrPrint(leftShooter, leftCfg);
-    configOrPrint(rightShooter, rightCfg);
+    configOrPrint(upperMotor, upperCfg);
+    configOrPrint(lowerMotor, lowerCfg);
   }
 
   private void configOrPrint(SparkMax spark, SparkMaxConfig cfg) {
@@ -41,15 +40,19 @@ public class ShooterSubsystem extends SubsystemBase {
     }
   }
 
+  public void load() {
+    set(Constants.Feeder.LOAD_SPEED);
+  }
+
   /** speed in [-1, 1] */
   public void set(double speed) {
-    speed = MathUtil.clamp(speed, -1.0, 1.0);
-    leftShooter.set(speed);
-    rightShooter.set(speed);
+    double output = MathUtil.clamp(speed, -1.0, 1.0);
+    upperMotor.set(output);
+    lowerMotor.set(output);
   }
 
   public void stop() {
-    leftShooter.stopMotor();
-    rightShooter.stopMotor();
+    upperMotor.stopMotor();
+    lowerMotor.stopMotor();
   }
 }
