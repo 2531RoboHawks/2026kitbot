@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
+  @SuppressWarnings("unused")
   private RobotContainer robotContainer;
 
   // Read the driver controller directly for telemetry (USB port 0)
