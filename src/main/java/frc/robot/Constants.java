@@ -40,13 +40,14 @@ public final class Constants {
 
     // Right motor was running opposite; invert to match left
     public static final boolean RIGHT_INVERT = true;
+    // Keep default direction; specific actions flip the left motor in code.
     public static final boolean LEFT_INVERT = false;
     public static final int CURRENT_LIMIT_AMPS = 30;
 
     // Speeds to load balls when B is held.
     // Right runs forward, left runs reversed and slower.
     public static final double LOAD_RIGHT_SPEED = 0.6;
-    public static final double LOAD_LEFT_SPEED = -0.3;
+    public static final double LOAD_LEFT_SPEED = -0.5;
     public static final double MANUAL_TRIGGER_DEADBAND = 0.05;
   }
 

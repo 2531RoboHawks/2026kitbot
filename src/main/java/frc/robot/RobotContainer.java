@@ -38,7 +38,8 @@ public class RobotContainer {
               } else {
                 double rt = driver.getRightTriggerAxis();
                 if (rt > Constants.Shooter.TRIGGER_DEADBAND) {
-                  shooter.set(rt); // variable shooter speed
+                  // Invert RT only
+                  shooter.set(-rt, -rt); // variable shooter speed
                   return;
                 }
               }
@@ -52,6 +53,7 @@ public class RobotContainer {
                     "Shooter/LoadLeft (debug)",
                     Constants.Feeder.LOAD_LEFT_SPEED
                 );
+                // Both motors same direction for B-load
                 shooter.set(right, left);
               } else {
                 double lt = driver.getLeftTriggerAxis();
