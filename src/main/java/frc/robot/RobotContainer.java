@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 
 import frc.robot.subsystems.DriveSubsystem;
@@ -13,6 +14,10 @@ public class RobotContainer {
   private final XboxController driver = new XboxController(Constants.DRIVER_CONTROLLER_PORT);
 
   public RobotContainer() {
+    // Seed debug tunables so they show up on the dashboard
+    SmartDashboard.putNumber("Shooter/LoadRight (debug)", Constants.Feeder.LOAD_RIGHT_SPEED);
+    SmartDashboard.putNumber("Shooter/LoadLeft (debug)", Constants.Feeder.LOAD_LEFT_SPEED);
+
     // Drive: LEFT stick does everything
     drive.setDefaultCommand(
         new RunCommand(
@@ -39,7 +44,15 @@ public class RobotContainer {
               }
 
               if (driver.getBButton()) {
-                shooter.load();
+                double right = SmartDashboard.getNumber(
+                    "Shooter/LoadRight (debug)",
+                    Constants.Feeder.LOAD_RIGHT_SPEED
+                );
+                double left = SmartDashboard.getNumber(
+                    "Shooter/LoadLeft (debug)",
+                    Constants.Feeder.LOAD_LEFT_SPEED
+                );
+                shooter.set(right, left);
               } else {
                 double lt = driver.getLeftTriggerAxis();
                 if (lt > Constants.Feeder.MANUAL_TRIGGER_DEADBAND) {
@@ -52,5 +65,9 @@ public class RobotContainer {
             shooter
         )
     );
+  }
+
+  public XboxController getDriver() {
+    return driver;
   }
 }

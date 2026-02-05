@@ -34,16 +34,19 @@ public final class Constants {
 
   public static final class Feeder {
     // Shared feeder/shooter motors:
-    // CAN 6 = upper/right motor, CAN 5 = lower/floor motor.
-    public static final int UPPER_MOTOR_ID = 6;
-    public static final int LOWER_MOTOR_ID = 5;
+    // CAN 6 = right motor, CAN 5 = left motor.
+    public static final int RIGHT_MOTOR_ID = 6;
+    public static final int LEFT_MOTOR_ID = 5;
 
-    public static final boolean UPPER_INVERT = false;
-    public static final boolean LOWER_INVERT = false;
+    // Right motor was running opposite; invert to match left
+    public static final boolean RIGHT_INVERT = true;
+    public static final boolean LEFT_INVERT = false;
     public static final int CURRENT_LIMIT_AMPS = 30;
 
-    // Speed to load balls when B is held.
-    public static final double LOAD_SPEED = 0.6;
+    // Speeds to load balls when B is held.
+    // Right runs forward, left runs reversed and slower.
+    public static final double LOAD_RIGHT_SPEED = 0.6;
+    public static final double LOAD_LEFT_SPEED = -0.3;
     public static final double MANUAL_TRIGGER_DEADBAND = 0.05;
   }
 

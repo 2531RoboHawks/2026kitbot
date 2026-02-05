@@ -2,16 +2,12 @@ package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
   @SuppressWarnings("unused")
   private RobotContainer robotContainer;
-
-  // Read the driver controller directly for telemetry (USB port 0)
-  private final XboxController driver = new XboxController(Constants.DRIVER_CONTROLLER_PORT);
 
   // Deadband for direction indicators so they don't flicker
   private static final double DIR_DEADBAND = 0.15;
@@ -24,6 +20,12 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+
+    if (robotContainer == null) {
+      return;
+    }
+
+    var driver = robotContainer.getDriver();
 
     // Raw axes
     double leftX = driver.getLeftX();
