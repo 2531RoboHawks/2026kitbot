@@ -1,1 +1,6 @@
-kitbot code for 2026 
+kitbot code for 2026
+
+now having hopper auto fill
+
+
+

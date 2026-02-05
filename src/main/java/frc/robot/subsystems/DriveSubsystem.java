@@ -56,9 +56,6 @@ public class DriveSubsystem extends SubsystemBase {
 
   /** Left stick controls whole drive (arcade mixing). */
   public void singleStickDrive(double forward, double turn) {
-    forward = MathUtil.applyDeadband(forward, Constants.Drive.DEADBAND);
-    turn = MathUtil.applyDeadband(turn, Constants.Drive.DEADBAND);
-
     forward = MathUtil.clamp(forward, -1.0, 1.0);
     turn = MathUtil.clamp(turn, -1.0, 1.0);
 
