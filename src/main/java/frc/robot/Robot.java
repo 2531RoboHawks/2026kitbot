@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.DebugTuning;
 
+@SuppressWarnings("unused")
 public class Robot extends TimedRobot {
   @SuppressWarnings("unused")
   private RobotContainer robotContainer;
