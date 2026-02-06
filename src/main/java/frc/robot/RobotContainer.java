@@ -1,22 +1,25 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 
+import frc.robot.DebugTuning;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotContainer {
   private final DriveSubsystem drive = new DriveSubsystem();
   private final ShooterSubsystem shooter = new ShooterSubsystem();
+  @SuppressWarnings("unused")
+  private final LimelightSubsystem limelight = new LimelightSubsystem();
 
   private final XboxController driver = new XboxController(Constants.DRIVER_CONTROLLER_PORT);
 
   public RobotContainer() {
     // Seed debug tunables so they show up on the dashboard
-    SmartDashboard.putNumber("Shooter/LoadRight (debug)", Constants.Feeder.LOAD_RIGHT_SPEED);
-    SmartDashboard.putNumber("Shooter/LoadLeft (debug)", Constants.Feeder.LOAD_LEFT_SPEED);
+    DebugTuning.seedNumber("Shooter/LoadRight", Constants.Feeder.LOAD_RIGHT_SPEED);
+    DebugTuning.seedNumber("Shooter/LoadLeft", Constants.Feeder.LOAD_LEFT_SPEED);
 
     // Drive: LEFT stick does everything
     drive.setDefaultCommand(
@@ -45,14 +48,10 @@ public class RobotContainer {
               }
 
               if (driver.getBButton()) {
-                double right = SmartDashboard.getNumber(
-                    "Shooter/LoadRight (debug)",
-                    Constants.Feeder.LOAD_RIGHT_SPEED
-                );
-                double left = SmartDashboard.getNumber(
-                    "Shooter/LoadLeft (debug)",
-                    Constants.Feeder.LOAD_LEFT_SPEED
-                );
+                double right =
+                    DebugTuning.getNumber("Shooter/LoadRight", Constants.Feeder.LOAD_RIGHT_SPEED);
+                double left =
+                    DebugTuning.getNumber("Shooter/LoadLeft", Constants.Feeder.LOAD_LEFT_SPEED);
                 // Both motors same direction for B-load
                 shooter.set(right, left);
               } else {

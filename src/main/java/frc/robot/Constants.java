@@ -2,6 +2,8 @@ package frc.robot;
 
 public final class Constants {
 
+  public static final boolean DEBUG = false;
+
   public static final int DRIVER_CONTROLLER_PORT = 0;
 
   public static final class Drive {
@@ -49,6 +51,23 @@ public final class Constants {
     public static final double LOAD_RIGHT_SPEED = 0.6;
     public static final double LOAD_LEFT_SPEED = -0.5;
     public static final double MANUAL_TRIGGER_DEADBAND = 0.05;
+  }
+
+  public static final class Limelight {
+    // Robot frame: +X forward, +Y left, +Z up
+    // Origin: robot center at floor plane
+    // Rotation: roll about +X, pitch about +Y, yaw about +Z (right-hand rule)
+    public static final String CAMERA_NAME = "limelight";
+
+    // Mount translation in meters
+    public static final double MOUNT_X_M = 0.0;
+    public static final double MOUNT_Y_M = 0.0;
+    public static final double MOUNT_Z_M = 0.0;
+
+    // Mount rotation in degrees
+    public static final double MOUNT_ROLL_DEG = 0.0;
+    public static final double MOUNT_PITCH_DEG = 0.0;
+    public static final double MOUNT_YAW_DEG = 0.0;
   }
 
   private Constants() {}

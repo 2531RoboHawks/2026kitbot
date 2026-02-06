@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
+import frc.robot.DebugTuning;
+
 public class Robot extends TimedRobot {
   @SuppressWarnings("unused")
   private RobotContainer robotContainer;
@@ -15,11 +17,13 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
+    DebugTuning.init();
   }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    DebugTuning.handleSave();
 
     if (robotContainer == null) {
       return;
