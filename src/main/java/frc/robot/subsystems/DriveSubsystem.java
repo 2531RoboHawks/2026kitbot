@@ -11,7 +11,6 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants;
@@ -23,10 +22,7 @@ public class DriveSubsystem extends SubsystemBase {
   private final SparkMax rightFront = new SparkMax(Constants.Drive.RIGHT_FRONT_ID, MotorType.kBrushless);
   private final SparkMax rightRear  = new SparkMax(Constants.Drive.RIGHT_REAR_ID,  MotorType.kBrushless);
 
-  private final MotorControllerGroup leftGroup  = new MotorControllerGroup(leftFront, leftRear);
-  private final MotorControllerGroup rightGroup = new MotorControllerGroup(rightFront, rightRear);
-
-  private final DifferentialDrive drive = new DifferentialDrive(leftGroup, rightGroup);
+  private final DifferentialDrive drive = new DifferentialDrive(leftFront, rightFront);
 
   public DriveSubsystem() {
     SparkMaxConfig leftCfg = new SparkMaxConfig();
@@ -44,6 +40,10 @@ public class DriveSubsystem extends SubsystemBase {
     configOrPrint(rightFront, rightCfg);
     configOrPrint(rightRear, rightCfg);
 
+    // Use REV follow mode instead of MotorControllerGroup (deprecated in WPILib 2024).
+    followOrPrint(leftRear, leftFront, false);
+    followOrPrint(rightRear, rightFront, false);
+
     drive.setDeadband(Constants.Drive.DEADBAND);
   }
 
@@ -51,6 +51,16 @@ public class DriveSubsystem extends SubsystemBase {
     REVLibError err = spark.configure(cfg, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     if (err != REVLibError.kOk) {
       System.out.println("Drive SPARK configure failed (CAN " + spark.getDeviceId() + "): " + err);
+    }
+  }
+
+  private void followOrPrint(SparkMax follower, SparkMax leader, boolean invert) {
+    SparkMaxConfig followCfg = new SparkMaxConfig();
+    followCfg.follow(leader, invert);
+
+    REVLibError err = follower.configure(followCfg, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    if (err != REVLibError.kOk) {
+      System.out.println("Drive SPARK follow configure failed (CAN " + follower.getDeviceId() + "): " + err);
     }
   }
 
