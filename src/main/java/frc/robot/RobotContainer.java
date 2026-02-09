@@ -38,8 +38,9 @@ public class RobotContainer {
               } else {
                 double rt = driver.getRightTriggerAxis();
                 if (rt > Constants.Shooter.TRIGGER_DEADBAND) {
-                  // Invert RT only
-                  shooter.set(-rt, -rt); // variable shooter speed
+                  // Invert RT only and scale it up for faster shooting.
+                  double boostedRt = Math.min(rt * Constants.Shooter.RT_SPEED_MULTIPLIER, 1.0);
+                  shooter.set(-boostedRt, -boostedRt); // variable shooter speed
                   return;
                 }
               }

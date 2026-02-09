@@ -29,6 +29,7 @@ public final class Constants {
 
   public static final double FULL_SPEED = 1.0;       // RB
   public static final double REVERSE_SPEED = -1.0;  // LB
+  public static final double RT_SPEED_MULTIPLIER = 1.35;
   public static final double TRIGGER_DEADBAND = 0.05;
 }
 
