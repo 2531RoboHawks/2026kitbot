@@ -31,6 +31,10 @@ public final class Constants {
   public static final double REVERSE_SPEED = -1.0;  // LB
   public static final double RT_SPEED_MULTIPLIER = 1.35;
   public static final double TRIGGER_DEADBAND = 0.05;
+  // Delay to spin up one motor first when RT is pressed
+  public static final double RT_DELAY_SECONDS = 0.5;
+  // Swap which motor is delayed: false = delay right, true = delay left
+  public static final boolean RT_DELAY_SWAP = false;
 }
 
   public static final class Feeder {
@@ -54,4 +58,3 @@ public final class Constants {
 
   private Constants() {}
 }
-//when i press rt wailt 1 seccond before enabling the right motor (add a swap option) so motor haves some time get up to spead
