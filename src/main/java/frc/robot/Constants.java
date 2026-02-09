@@ -54,3 +54,4 @@ public final class Constants {
 
   private Constants() {}
 }
+//when i press rt wailt 1 seccond before enabling the right motor (add a swap option) so motor haves some time get up to spead
