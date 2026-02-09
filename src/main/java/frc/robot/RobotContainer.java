@@ -24,7 +24,7 @@ public class RobotContainer {
     // Drive: LEFT stick does everything
     drive.setDefaultCommand(
         new RunCommand(
-            () -> drive.singleStickDrive(-driver.getLeftY(), driver.getLeftX()),
+            () -> drive.singleStickDrive(-driver.getLeftY(), -driver.getRightX()),
             drive
         )
     );
