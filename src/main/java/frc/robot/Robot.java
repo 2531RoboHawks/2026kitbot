@@ -28,23 +28,23 @@ public class Robot extends TimedRobot {
     var driver = robotContainer.getDriver();
 
     // Raw axes
-    double leftX = driver.getLeftX();
+    double rightx = driver.getRightX();
     double leftY = driver.getLeftY();
     double rt = driver.getRightTriggerAxis();
     double lt = driver.getLeftTriggerAxis();
 
     // Match your drive sign convention (RobotContainer uses -getLeftY())
     double forwardCmd = MathUtil.applyDeadband(-leftY, DIR_DEADBAND);
-    double turnCmd = MathUtil.applyDeadband(leftX, DIR_DEADBAND);
+    double turnCmd = MathUtil.applyDeadband(rightx, DIR_DEADBAND);
 
     // Direction booleans (Up = stick forward -> leftY is negative)
     boolean up = (-leftY) > DIR_DEADBAND;
     boolean down = (-leftY) < -DIR_DEADBAND;
-    boolean right = leftX > DIR_DEADBAND;
-    boolean left = leftX < -DIR_DEADBAND;
+    boolean right = rightx > DIR_DEADBAND;
+    boolean left = rightx < -DIR_DEADBAND;
 
     // Publish for Elastic
-    SmartDashboard.putNumber("Controller/LeftX", leftX);
+    SmartDashboard.putNumber("Controller/rightx", rightx);
     SmartDashboard.putNumber("Controller/LeftY", leftY);
 
     SmartDashboard.putNumber("Controller/ForwardCmd", forwardCmd);
