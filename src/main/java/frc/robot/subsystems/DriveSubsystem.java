@@ -23,7 +23,9 @@ public class DriveSubsystem extends SubsystemBase {
   private final SparkMax rightFront = new SparkMax(Constants.Drive.RIGHT_FRONT_ID, MotorType.kBrushless);
   private final SparkMax rightRear  = new SparkMax(Constants.Drive.RIGHT_REAR_ID,  MotorType.kBrushless);
 
+  @SuppressWarnings("removal")
   private final MotorControllerGroup leftGroup  = new MotorControllerGroup(leftFront, leftRear);
+  @SuppressWarnings("removal")
   private final MotorControllerGroup rightGroup = new MotorControllerGroup(rightFront, rightRear);
 
   private final DifferentialDrive drive = new DifferentialDrive(leftGroup, rightGroup);
