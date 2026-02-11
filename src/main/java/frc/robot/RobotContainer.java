@@ -1,5 +1,8 @@
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.HttpCamera;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -11,23 +14,63 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class RobotContainer {
   private final DriveSubsystem drive = new DriveSubsystem();
   private final ShooterSubsystem shooter = new ShooterSubsystem();
+  private final HttpCamera limelightCamera =
+      new HttpCamera("limelight", Constants.Vision.LIMELIGHT_STREAM_URL);
 
   private final XboxController driver = new XboxController(Constants.DRIVER_CONTROLLER_PORT);
   private final Timer rtDelayTimer = new Timer();
   private boolean rtWasActive = false;
 
+  private final SlewRateLimiter normalFwdLimiter =
+      new SlewRateLimiter(Constants.Drive.FWD_SLEW_RATE);
+  private final SlewRateLimiter normalTurnLimiter =
+      new SlewRateLimiter(Constants.Drive.TURN_SLEW_RATE);
+  private final SlewRateLimiter slowFwdLimiter =
+      new SlewRateLimiter(Constants.Drive.FWD_SLEW_RATE * Constants.Drive.SPEED_LIMIT_RATE_SCALE);
+  private final SlewRateLimiter slowTurnLimiter =
+      new SlewRateLimiter(Constants.Drive.TURN_SLEW_RATE * Constants.Drive.SPEED_LIMIT_RATE_SCALE);
+  private boolean speedLimitActive = false;
+  private double lastFwd = 0.0;
+  private double lastTurn = 0.0;
+
   public RobotContainer() {
     // Seed debug tunables so they show up on the dashboard
     SmartDashboard.putNumber("Shooter/LoadRight (debug)", Constants.Feeder.LOAD_RIGHT_SPEED);
     SmartDashboard.putNumber("Shooter/LoadLeft (debug)", Constants.Feeder.LOAD_LEFT_SPEED);
+    SmartDashboard.putBoolean("Drive/SpeedLimit", false);
+    SmartDashboard.putString("Vision/LimelightStream", Constants.Vision.LIMELIGHT_STREAM_URL);
+
+    CameraServer.startAutomaticCapture(limelightCamera);
 
     // Drive: LEFT stick does everything
     drive.setDefaultCommand(
         new RunCommand(
-            () -> drive.singleStickDrive(
-                -driver.getLeftY(),
-                -driver.getRightX() * Constants.Drive.TURN_SCALE
-            ),
+            () -> {
+              boolean limit = SmartDashboard.getBoolean("Drive/SpeedLimit", false);
+
+              if (limit != speedLimitActive) {
+                speedLimitActive = limit;
+                if (limit) {
+                  slowFwdLimiter.reset(lastFwd);
+                  slowTurnLimiter.reset(lastTurn);
+                } else {
+                  normalFwdLimiter.reset(lastFwd);
+                  normalTurnLimiter.reset(lastTurn);
+                }
+              }
+
+              double scale = limit ? Constants.Drive.SPEED_LIMIT_SCALE : 1.0;
+              double fwd = -driver.getLeftY() * scale;
+              double turn = -driver.getRightX() * Constants.Drive.TURN_SCALE * scale;
+
+              double outFwd = (limit ? slowFwdLimiter : normalFwdLimiter).calculate(fwd);
+              double outTurn = (limit ? slowTurnLimiter : normalTurnLimiter).calculate(turn);
+
+              lastFwd = outFwd;
+              lastTurn = outTurn;
+
+              drive.singleStickDrive(outFwd, outTurn);
+            },
             drive
         )
     );

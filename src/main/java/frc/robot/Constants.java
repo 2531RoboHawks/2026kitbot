@@ -17,7 +17,13 @@ public final class Constants {
     public static final int CURRENT_LIMIT_AMPS = 50;
     public static final double DEADBAND = 0.05;
     // Scale down turning responsiveness
-    public static final double TURN_SCALE = 0.6;
+    public static final double TURN_SCALE = 0.8;
+    // Slew-rate limits (units per second)
+    public static final double FWD_SLEW_RATE = 3.0;
+    public static final double TURN_SLEW_RATE = 3.0;
+    // Speed-limit mode scaling
+    public static final double SPEED_LIMIT_SCALE = 0.5;
+    public static final double SPEED_LIMIT_RATE_SCALE = 0.5;
   }
 
   public static final class Shooter {
@@ -56,6 +62,11 @@ public final class Constants {
     public static final double LOAD_RIGHT_SPEED = 0.6;
     public static final double LOAD_LEFT_SPEED = -0.5;
     public static final double MANUAL_TRIGGER_DEADBAND = 0.05;
+  }
+
+  public static final class Vision {
+    // Default Limelight stream URL (update if your Limelight has a custom hostname)
+    public static final String LIMELIGHT_STREAM_URL = "http://limelight.local:5800/stream.mjpg";
   }
 
   private Constants() {}
