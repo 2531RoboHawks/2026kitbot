@@ -24,13 +24,16 @@ public class RobotContainer {
     // Drive: LEFT stick does everything
     drive.setDefaultCommand(
         new RunCommand(
-            () -> drive.singleStickDrive(-driver.getLeftY(), -driver.getRightX()),
+            () -> drive.singleStickDrive(
+                -driver.getLeftY(),
+                -driver.getRightX() * Constants.Drive.TURN_SCALE
+            ),
             drive
         )
     );
 
     // Shared shooter/feeder motors control:
-    // Priority: LB reverse > RB full > RT variable > B load > LT variable > stop
+    // Priority: LB reverse > RB full > RT variable > LT load > B manual > stop
     shooter.setDefaultCommand(
         new RunCommand(
             () -> {
@@ -49,7 +52,8 @@ public class RobotContainer {
                 resetRtDelay();
               }
 
-              if (driver.getBButton()) {
+              double lt = driver.getLeftTriggerAxis();
+              if (lt > Constants.Feeder.MANUAL_TRIGGER_DEADBAND) {
                 double right = SmartDashboard.getNumber(
                     "Shooter/LoadRight (debug)",
                     Constants.Feeder.LOAD_RIGHT_SPEED
@@ -58,15 +62,12 @@ public class RobotContainer {
                     "Shooter/LoadLeft (debug)",
                     Constants.Feeder.LOAD_LEFT_SPEED
                 );
-                // Both motors same direction for B-load
+                // Both motors same direction for LT-load
                 shooter.set(right, left);
+              } else if (driver.getBButton()) {
+                shooter.set(Constants.Shooter.FULL_SPEED);
               } else {
-                double lt = driver.getLeftTriggerAxis();
-                if (lt > Constants.Feeder.MANUAL_TRIGGER_DEADBAND) {
-                  shooter.set(lt);
-                } else {
-                  shooter.stop();
-                }
+                shooter.stop();
               }
             },
             shooter

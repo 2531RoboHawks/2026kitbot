@@ -16,6 +16,8 @@ public final class Constants {
 
     public static final int CURRENT_LIMIT_AMPS = 50;
     public static final double DEADBAND = 0.05;
+    // Scale down turning responsiveness
+    public static final double TURN_SCALE = 0.6;
   }
 
   public static final class Shooter {
@@ -49,7 +51,7 @@ public final class Constants {
     public static final boolean LEFT_INVERT = false;
     public static final int CURRENT_LIMIT_AMPS = 30;
 
-    // Speeds to load balls when B is held.
+    // Speeds to load balls when LT is held.
     // Right runs forward, left runs reversed and slower.
     public static final double LOAD_RIGHT_SPEED = 0.6;
     public static final double LOAD_LEFT_SPEED = -0.5;
