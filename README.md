@@ -12,3 +12,6 @@ LT: unjam hopper/shoot
 
 B: Load in to hopper 
 
+Elastic camera:
+Add a Camera Stream widget from /CameraPublisher/limelight-a
+

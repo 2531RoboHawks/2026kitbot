@@ -65,7 +65,9 @@ public final class Constants {
   }
 
   public static final class Vision {
-    // Default Limelight stream URL (update if your Limelight has a custom hostname)
+    // Camera name as it appears under /CameraPublisher in Elastic.
+    public static final String LIMELIGHT_CAMERA_NAME = "limelight-a";
+    // Limelight MJPEG stream URL (update if your Limelight has a custom hostname or static IP)
     public static final String LIMELIGHT_STREAM_URL = "http://limelight.local:5800/stream.mjpg";
   }
 

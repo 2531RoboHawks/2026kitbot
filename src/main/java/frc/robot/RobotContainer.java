@@ -15,7 +15,11 @@ public class RobotContainer {
   private final DriveSubsystem drive = new DriveSubsystem();
   private final ShooterSubsystem shooter = new ShooterSubsystem();
   private final HttpCamera limelightCamera =
-      new HttpCamera("limelight", Constants.Vision.LIMELIGHT_STREAM_URL);
+      new HttpCamera(
+          Constants.Vision.LIMELIGHT_CAMERA_NAME,
+          Constants.Vision.LIMELIGHT_STREAM_URL,
+          HttpCamera.HttpCameraKind.kMJPGStreamer
+      );
 
   private final XboxController driver = new XboxController(Constants.DRIVER_CONTROLLER_PORT);
   private final Timer rtDelayTimer = new Timer();
