@@ -69,5 +69,39 @@ public final class Constants {
     public static final String LIMELIGHT_STREAM_URL = "http://limelight.local:5800/stream.mjpg";
   }
 
+  public static final class CANdle {
+    public static final int CAN_ID = 40;
+    // Empty string uses the default bus for the platform ("rio" on roboRIO).
+    public static final String CAN_BUS = "";
+    public static final int LED_START = 0;
+    public static final int LED_ONBOARD_COUNT = 8;
+    public static final int LED_EXTERNAL_COUNT = 60;
+    public static final int LED_END = LED_START + LED_ONBOARD_COUNT + LED_EXTERNAL_COUNT - 1;
+
+
+    // Strip color order: "GRB" (most common) or "RGB".
+    public static final String STRIP_TYPE = "GRB";
+
+    public static final String KEY_R = "CANdle/R";
+    public static final String KEY_G = "CANdle/G";
+    public static final String KEY_B = "CANdle/B";
+    public static final String KEY_OFF = "CANdle/Off";
+    public static final String KEY_AUTO_MODE = "CANdle/AutoMode";
+    public static final String KEY_PURPLE_GOLD = "CANdle/PurpleGold";
+    public static final String KEY_STATUS = "CANdle/Status";
+    public static final String KEY_CONFIG_STATUS = "CANdle/ConfigStatus";
+    public static final String KEY_APPLIED_R = "CANdle/AppliedR";
+    public static final String KEY_APPLIED_G = "CANdle/AppliedG";
+    public static final String KEY_APPLIED_B = "CANdle/AppliedB";
+
+    public static final int PURPLE_R = 128;
+    public static final int PURPLE_G = 0;
+    public static final int PURPLE_B = 255;
+    public static final int GOLD_R = 255;
+    public static final int GOLD_G = 191;
+    public static final int GOLD_B = 0;
+    public static final double AUTO_CYCLE_SECONDS = 4.0;
+  }
+
   private Constants() {}
 }
