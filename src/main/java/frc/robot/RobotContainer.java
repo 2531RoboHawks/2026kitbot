@@ -72,6 +72,7 @@ public class RobotContainer {
               double scale = limit ? Constants.Drive.SPEED_LIMIT_SCALE : 1.0;
               double fwd = -driver.getLeftY() * scale;
               double turn = -driver.getRightX() * Constants.Drive.TURN_SCALE * scale;
+              turn += Constants.Drive.STRAIGHT_TRIM * fwd;
 
               double outFwd = (limit ? slowFwdLimiter : normalFwdLimiter).calculate(fwd);
               double outTurn = (limit ? slowTurnLimiter : normalTurnLimiter).calculate(turn);
