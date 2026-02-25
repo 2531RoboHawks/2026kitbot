@@ -10,10 +10,13 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.CandleSubsystem;
 
 public class RobotContainer {
   private final DriveSubsystem drive = new DriveSubsystem();
   private final ShooterSubsystem shooter = new ShooterSubsystem();
+  @SuppressWarnings("unused")
+  private final CandleSubsystem candle = new CandleSubsystem();
   private final HttpCamera limelightCamera =
       new HttpCamera("limelight", Constants.Vision.LIMELIGHT_STREAM_URL);
 
@@ -39,6 +42,13 @@ public class RobotContainer {
     SmartDashboard.putNumber("Shooter/LoadLeft (debug)", Constants.Feeder.LOAD_LEFT_SPEED);
     SmartDashboard.putBoolean("Drive/SpeedLimit", false);
     SmartDashboard.putString("Vision/LimelightStream", Constants.Vision.LIMELIGHT_STREAM_URL);
+    SmartDashboard.putNumber(Constants.CANdle.KEY_R, 0);
+    SmartDashboard.putNumber(Constants.CANdle.KEY_G, 0);
+    SmartDashboard.putNumber(Constants.CANdle.KEY_B, 0);
+    SmartDashboard.putBoolean(Constants.CANdle.KEY_OFF, true);
+    // Auto mode button disabled; purple/gold toggle drives auto behavior.
+    // SmartDashboard.putBoolean(Constants.CANdle.KEY_AUTO_MODE, false);
+    SmartDashboard.putBoolean(Constants.CANdle.KEY_PURPLE_GOLD, false);
 
     CameraServer.startAutomaticCapture(limelightCamera);
 
