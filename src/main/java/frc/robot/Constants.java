@@ -19,7 +19,7 @@ public final class Constants {
     // Scale down turning responsiveness
     public static final double TURN_SCALE = 0.8;
     // Straight-drive trim: positive = nudge right, negative = nudge left
-    public static final double STRAIGHT_TRIM = -0.3;
+    public static final double STRAIGHT_TRIM = 0  ;
     // Slew-rate limits (units per second)
     public static final double FWD_SLEW_RATE = 3.0;
     public static final double TURN_SLEW_RATE = 3.0;
