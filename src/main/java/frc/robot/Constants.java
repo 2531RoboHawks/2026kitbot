@@ -6,10 +6,10 @@ public final class Constants {
 
   public static final class Drive {
     // Your CAN IDs
-    public static final int LEFT_FRONT_ID  = 4; //4
-    public static final int LEFT_REAR_ID   = 3; //3
-    public static final int RIGHT_FRONT_ID = 1; //1
-    public static final int RIGHT_REAR_ID  = 2; //2
+    public static final int LEFT_FRONT_ID  = 4;
+    public static final int LEFT_REAR_ID   = 3;
+    public static final int RIGHT_FRONT_ID = 1;
+    public static final int RIGHT_REAR_ID  = 2;
 
     // If it spins when pushing forward, flip this
     public static final boolean INVERT_RIGHT_SIDE = true;
@@ -19,7 +19,7 @@ public final class Constants {
     // Scale down turning responsiveness
     public static final double TURN_SCALE = 0.8;
     // Straight-drive trim: positive = nudge right, negative = nudge left
-    public static final double STRAIGHT_TRIM = 0  ;
+    public static final double STRAIGHT_TRIM = 0;
     // Slew-rate limits (units per second)
     public static final double FWD_SLEW_RATE = 3.0;
     public static final double TURN_SLEW_RATE = 3.0;
@@ -29,23 +29,23 @@ public final class Constants {
   }
 
   public static final class Shooter {
-  public static final int LEFT_SHOOTER_ID  = 5;
-  public static final int RIGHT_SHOOTER_ID = 6;
+    public static final int LEFT_SHOOTER_ID  = 5;
+    public static final int RIGHT_SHOOTER_ID = 6;
 
-  // Set true if the wheels fight each other / spin opposite
-  public static final boolean INVERT_RIGHT_SHOOTER = true;
+    // Set true if the wheels fight each other / spin opposite
+    public static final boolean INVERT_RIGHT_SHOOTER = true;
 
-  public static final int CURRENT_LIMIT_AMPS = 40;
+    public static final int CURRENT_LIMIT_AMPS = 40;
 
-  public static final double FULL_SPEED = 1.0;       // RB
-  public static final double REVERSE_SPEED = -1.0;  // LB
-  public static final double RT_SPEED_MULTIPLIER = 1.35;
-  public static final double TRIGGER_DEADBAND = 0.05;
-  // Delay to spin up one motor first when RT is pressed
-  public static final double RT_DELAY_SECONDS = 0.5;
-  // Swap which motor is delayed: false = delay right, true = delay left
-  public static final boolean RT_DELAY_SWAP = false;
-}
+    public static final double FULL_SPEED = 1.0;       // RB
+    public static final double REVERSE_SPEED = -1.0;  // LB
+    public static final double RT_SPEED_MULTIPLIER = 1.35;
+    public static final double TRIGGER_DEADBAND = 0.05;
+    // Delay to spin up one motor first when RT is pressed
+    public static final double RT_DELAY_SECONDS = 0.5;
+    // Swap which motor is delayed: false = delay right, true = delay left
+    public static final boolean RT_DELAY_SWAP = false;
+  }
 
   public static final class Feeder {
     // Shared feeder/shooter motors:

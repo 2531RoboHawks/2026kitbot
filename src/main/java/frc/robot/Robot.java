@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
-  @SuppressWarnings("unused")
   private RobotContainer robotContainer;
 
   // Deadband for direction indicators so they don't flicker

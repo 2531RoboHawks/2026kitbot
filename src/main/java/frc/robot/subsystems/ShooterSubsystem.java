@@ -17,18 +17,18 @@ public class ShooterSubsystem extends SubsystemBase {
   private final SparkMax leftMotor = new SparkMax(Constants.Feeder.LEFT_MOTOR_ID, MotorType.kBrushed);
 
   public ShooterSubsystem() {
-    SparkMaxConfig upperCfg = new SparkMaxConfig();
-    upperCfg.smartCurrentLimit(Constants.Feeder.CURRENT_LIMIT_AMPS);
-    upperCfg.idleMode(IdleMode.kBrake);
-    upperCfg.inverted(Constants.Feeder.RIGHT_INVERT);
+    SparkMaxConfig rightCfg = new SparkMaxConfig();
+    rightCfg.smartCurrentLimit(Constants.Feeder.CURRENT_LIMIT_AMPS);
+    rightCfg.idleMode(IdleMode.kBrake);
+    rightCfg.inverted(Constants.Feeder.RIGHT_INVERT);
 
-    SparkMaxConfig lowerCfg = new SparkMaxConfig();
-    lowerCfg.smartCurrentLimit(Constants.Feeder.CURRENT_LIMIT_AMPS);
-    lowerCfg.idleMode(IdleMode.kBrake);
-    lowerCfg.inverted(Constants.Feeder.LEFT_INVERT);
+    SparkMaxConfig leftCfg = new SparkMaxConfig();
+    leftCfg.smartCurrentLimit(Constants.Feeder.CURRENT_LIMIT_AMPS);
+    leftCfg.idleMode(IdleMode.kBrake);
+    leftCfg.inverted(Constants.Feeder.LEFT_INVERT);
 
-    configOrPrint(rightMotor, upperCfg);
-    configOrPrint(leftMotor, lowerCfg);
+    configOrPrint(rightMotor, rightCfg);
+    configOrPrint(leftMotor, leftCfg);
   }
 
   private void configOrPrint(SparkMax spark, SparkMaxConfig cfg) {
